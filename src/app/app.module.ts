@@ -5,6 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SyntheseComponent } from './synthese/synthese.component';
 import { AnalyseComponent } from './analyse/analyse.component';
+import {RouterModule, Routes} from '@angular/router';
+
+
+const appRoutes: Routes = [
+  {path: 'analyse', component: AnalyseComponent},
+  {path: 'synthese', component: SyntheseComponent}
+];
 
 @NgModule({
   declarations: [
@@ -14,7 +21,8 @@ import { AnalyseComponent } from './analyse/analyse.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
