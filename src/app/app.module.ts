@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { SyntheseComponent } from './synthese/synthese.component';
 import { AnalyseComponent } from './analyse/analyse.component';
 import {RouterModule, Routes} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {AnalyseService} from './analyse.service';
+
 
 
 const appRoutes: Routes = [
@@ -16,15 +19,16 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    SyntheseComponent,
-    AnalyseComponent
+    AnalyseComponent,
+    SyntheseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AnalyseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

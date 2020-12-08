@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
+import {AnalyseService} from '../analyse.service';
+
 
 @Component({
   selector: 'app-analyse',
   templateUrl: './analyse.component.html',
   styleUrls: ['./analyse.component.css']
 })
+
+@Injectable()
 export class AnalyseComponent implements OnInit {
 
-  constructor() { }
+  public analyses = Array();
 
-  ngOnInit(): void {
+  constructor(private analyseService: AnalyseService) {
   }
 
-}
+  ngOnInit(){
+    this.analyseService.getAnalyse()
+      .subscribe(data => this.analyses = data);
+  }
+
+ }
