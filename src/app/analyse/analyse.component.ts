@@ -1,6 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {AnalyseService} from '../services/analyse.service';
-
+import {Analyse} from '../interfaces/analyse';
 
 
 @Component({
@@ -11,17 +11,19 @@ import {AnalyseService} from '../services/analyse.service';
 
 @Injectable()
 export class AnalyseComponent implements OnInit {
-
-  public analyses = Array();
+  public analyses: Analyse[] = [];
 
   constructor(private analyseService: AnalyseService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  public getData(): void {
     this.analyseService.getAnalyse()
       .subscribe(data => {
         this.analyses = data;
-        console.log(this.analyses);
       });
   }
 }

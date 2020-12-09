@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 import {Analyse} from '../interfaces/analyse';
 
 @Injectable({
@@ -9,13 +9,12 @@ import {Analyse} from '../interfaces/analyse';
 })
 export class AnalyseService {
 
-private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {
   }
 
-  getAnalyse(): Observable<Analyse[]>{
-
+  getAnalyse(): Observable<Analyse[]> {
     return this.http.get<Analyse[]>(this.apiUrl + '/analyse');
   }
 }
