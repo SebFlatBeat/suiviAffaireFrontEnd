@@ -8,8 +8,7 @@ import { AnalyseComponent } from './analyse/analyse.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {AnalyseService} from './services/analyse.service';
-
-
+import {CommonModule} from '@angular/common';
 
 const appRoutes: Routes = [
   {path: 'analyse', component: AnalyseComponent},
@@ -24,6 +23,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)

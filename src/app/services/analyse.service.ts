@@ -14,7 +14,7 @@ export class AnalyseService {
   constructor(private http: HttpClient) {
   }
 
-  getAnalyse(): Observable<Analyse[]> {
-    return this.http.get<Analyse[]>(this.apiUrl + '/analyse');
+  getAnalyse(): Observable<Analyse> {
+    return this.http.get<Analyse>(this.apiUrl + '/analyse');
   }
 }

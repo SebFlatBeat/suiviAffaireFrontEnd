@@ -11,7 +11,7 @@ import {Analyse} from '../interfaces/analyse';
 
 @Injectable()
 export class AnalyseComponent implements OnInit {
-  public analyses: Analyse[] = [];
+  public analyses: Analyse | undefined ;
 
   constructor(private analyseService: AnalyseService) {
   }
