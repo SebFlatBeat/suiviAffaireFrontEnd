@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AnalyseService} from './analyse.service';
+import {AnalyseService} from './services/analyse.service';
 
 
 @Component({

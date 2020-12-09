@@ -7,7 +7,7 @@ import { SyntheseComponent } from './synthese/synthese.component';
 import { AnalyseComponent } from './analyse/analyse.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-import {AnalyseService} from './analyse.service';
+import {AnalyseService} from './services/analyse.service';
 
 
 
