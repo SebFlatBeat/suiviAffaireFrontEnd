@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import {AnalyseService} from './services/analyse.service';
-
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +6,8 @@ import {AnalyseService} from './services/analyse.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private analyseService: AnalyseService) {
+  constructor() {
   }
   title = 'Suivi des Affaires';
+
 }
