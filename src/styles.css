@@ -19,3 +19,8 @@
   color: lawngreen !important;
   font-weight:bold;
 }
+
+.navbar-container {
+  position: sticky;
+  display: block;
+}
