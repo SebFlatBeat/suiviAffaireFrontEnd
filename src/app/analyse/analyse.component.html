@@ -1,46 +1,53 @@
 <div class="container-fluid body-under-nav">
-  <h2 class="text-center">Analyse</h2>
-   <div class="row">
+  <div class="flex-row">
     <div class="col-lg-auto">
-      <table class="table table-striped table-hover table-responsive-lg">
-        <thead class="text-center scroll-down">
+      <table class="table table-hover table-bordered table-responsive-lg">
+        <thead class="scroll-down">
         <tr>
-          <th class="table-info" scope="col">ID</th>
-          <th class="table-info" scope="col">IDC</th>
-          <th class="table-info" scope="col">PRM</th>
-          <th class="table-info" scope="col">Contrat Demandé</th>
-          <th class="table-info" scope="col">Contrat Initial</th>
-          <th class="table-info" scope="col">Numéro d'affaire</th>
-          <th class="table-info" scope="col">Portefeuille</th>
-          <th class="table-info" scope="col">Prestation</th>
-          <th class="table-warning" scope="col">Etat contractuel</th>
-          <th class="table-warning" scope="col">Mode de relevé</th>
-          <th class="table-warning" scope="col">Numéro DT</th>
-          <th class="table-warning" scope="col">Statut DT</th>
-          <th class="table-warning" scope="col">Préstation réalisée</th>
-          <th class="table-warning" scope="col">Réalisation</th>
-          <th class="table-success" scope="col">Etat Affaire</th>
-          <th class="table-success" scope="col">Intervention</th>
+          <th class="table-light" colspan="3" scope="col"></th>
+          <th class="table-success" colspan="4" scope="col">SGE</th>
+          <th class="table-warning" colspan="2" scope="col">SGO</th>
+          <th class="table-info" colspan="6" scope="col">GEC</th>
         </tr>
         </thead>
-        <tbody *ngFor="let sge of analyses.sge; let i = index"  class="text-center" >
+        <thead class="scroll-down">
         <tr>
-          <td>{{sge.id}}</td>
-          <td>{{sge.idc}}</td>
-          <td>{{sge.prm}}</td>
-          <td>{{sge.contratDemande}}</td>
-          <td>{{sge.contratInitial}}</td>
-          <td>{{sge.numeroAffaire}}</td>
-          <td>{{sge.portefeuille}}</td>
-          <td>{{sge.prestation}}</td>
-          <td>{{analyses.gec[i].etatContractuel}}</td>
-          <td>{{analyses.gec[i].modeReleve}}</td>
-          <td>{{analyses.gec[i].numeroDt}}</td>
-          <td>{{analyses.gec[i].statutDt}}</td>
-          <td>{{analyses.gec[i].prestationRealise}}</td>
-          <td>{{analyses.gec[i].realisation}}</td>
-          <td>{{analyses.sgo[i].etatAffaire}}</td>
-          <td>{{analyses.sgo[i].intervention}}</td>
+          <th class="table-light" scope="col">Numéro d'affaire</th>
+          <th class="table-light" scope="col">PRM</th>
+          <th class="table-light" scope="col">IDC</th>
+          <th class="table-success" scope="col">Portefeuille</th>
+          <th class="table-success" scope="col">Prestation</th>
+          <th class="table-success" scope="col">Contrat Demandé</th>
+          <th class="table-success" scope="col">Contrat Initial</th>
+          <th class="table-warning" scope="col">Etat Affaire</th>
+          <th class="table-warning" scope="col">Intervention</th>
+          <th class="table-info" scope="col">Etat contractuel</th>
+          <th class="table-info" scope="col">Mode relève</th>
+          <th class="table-info" scope="col">Numéro DT</th>
+          <th class="table-info" scope="col">Statut DT</th>
+          <th class="table-info" scope="col">Prestation réalisée</th>
+          <th class="table-info" scope="col">Réalisation</th>
+
+        </tr>
+        </thead>
+        <tbody *ngFor="let sge of analyses.sge; let i = index" class="text-center">
+        <tr>
+          <td scope="row">{{sge.numeroAffaire}}</td>
+          <td scope="row">{{sge.prm}}</td>
+          <td scope="row">{{sge.idc}}</td>
+          <td scope="row">{{sge.portefeuille}}</td>
+          <td scope="row">{{sge.prestation}}</td>
+          <td scope="row">{{sge.contratDemande}}</td>
+          <td scope="row">{{sge.contratInitial}}</td>
+          <td scope="row">{{analyses.sgo[i].etatAffaire}}</td>
+          <td scope="row">{{analyses.sgo[i].intervention}}</td>
+          <td scope="row">{{analyses.gec[i].etatContractuel}}</td>
+          <td scope="row">{{analyses.gec[i].modeReleve}}</td>
+          <td scope="row">{{analyses.gec[i].numeroDt}}</td>
+          <td scope="row">{{analyses.gec[i].statutDt}}</td>
+          <td scope="row">{{analyses.gec[i].prestationRealise}}</td>
+          <td scope="row">{{analyses.gec[i].realisation}}</td>
+
         </tr>
         </tbody>
       </table>
