@@ -1,4 +1,3 @@
-import {Sge} from './sge';
 
 export interface Gec{
   etatContractuel: string;
@@ -9,5 +8,4 @@ export interface Gec{
   prestationRealise: string;
   realisation: string;
   statutDt: string;
-  sge: Array<Sge>;
 }

@@ -1,3 +1,6 @@
+import {Gec} from './gec';
+import {Sgo} from './sgo';
+
 export interface Sge{
   contratDemande: string;
   contratInitial: string;
@@ -7,4 +10,6 @@ export interface Sge{
   portefeuille: string;
   prestation: string;
   prm: number;
+  gec: Gec;
+  sgo: Sgo;
 }
