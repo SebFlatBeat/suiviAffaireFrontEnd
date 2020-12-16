@@ -1,6 +1,8 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {AnalyseService} from '../services/analyse.service';
-import {Analyse} from '../interfaces/analyse';
+import {PageableGec} from '../interfaces/pageableGec';
+import {PageableSge} from '../interfaces/pageableSge';
+import {PageableSgo} from '../interfaces/pageableSgo';
 
 
 @Component({
@@ -11,7 +13,7 @@ import {Analyse} from '../interfaces/analyse';
 
 @Injectable()
 export class AnalyseComponent implements OnInit {
-  public analyses!: Analyse;
+  public analysesSge!: PageableSge;
 
   constructor(private analyseService: AnalyseService) {
   }
@@ -21,9 +23,9 @@ export class AnalyseComponent implements OnInit {
   }
 
   public getData(): void {
-    this.analyseService.getAnalyse()
+    this.analyseService.getAnalyseSge()
       .subscribe(data => {
-        this.analyses = data;
+        this.analysesSge = data;
       });
   }
 }

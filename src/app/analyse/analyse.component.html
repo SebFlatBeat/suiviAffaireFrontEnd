@@ -28,7 +28,7 @@
 
         </tr>
         </thead>
-        <tbody *ngFor="let sge of analyses.sge; let i = index" class="text-center">
+        <tbody *ngFor="let sge of analysesSge.content; let i = index" class="text-center">
         <tr>
           <td scope="row">{{sge.numeroAffaire}}</td>
           <td scope="row">{{sge.prm}}</td>
@@ -37,15 +37,14 @@
           <td scope="row">{{sge.prestation}}</td>
           <td scope="row">{{sge.contratDemande}}</td>
           <td scope="row">{{sge.contratInitial}}</td>
-          <td scope="row">{{analyses.sgo[i].etatAffaire}}</td>
-          <td scope="row">{{analyses.sgo[i].intervention}}</td>
-          <td scope="row">{{analyses.gec[i].etatContractuel}}</td>
-          <td scope="row">{{analyses.gec[i].modeReleve}}</td>
-          <td scope="row">{{analyses.gec[i].numeroDt}}</td>
-          <td scope="row">{{analyses.gec[i].statutDt}}</td>
-          <td scope="row">{{analyses.gec[i].prestationRealise}}</td>
-          <td scope="row">{{analyses.gec[i].realisation}}</td>
-
+          <td scope="row">{{sge.sgo.etatAffaire}}</td>
+          <td scope="row">{{sge.sgo.intervention}}</td>
+          <td scope="row">{{sge.gec.etatContractuel}}</td>
+          <td scope="row">{{sge.gec.modeReleve}}</td>
+          <td scope="row">{{sge.gec.numeroDt}}</td>
+          <td scope="row">{{sge.gec.statutDt}}</td>
+          <td scope="row">{{sge.gec.prestationRealise}}</td>
+          <td scope="row">{{sge.gec.realisation}}</td>
         </tr>
         </tbody>
       </table>

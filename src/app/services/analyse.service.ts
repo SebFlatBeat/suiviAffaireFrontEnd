@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {Analyse} from '../interfaces/analyse';
+import {PageableSge} from '../interfaces/pageableSge';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AnalyseService {
   constructor(private http: HttpClient) {
   }
 
-  getAnalyse(): Observable<Analyse> {
-    return this.http.get<Analyse>(this.apiUrl + '/analyse');
+  getAnalyseSge(): Observable<PageableSge> {
+    return this.http.get<PageableSge>(this.apiUrl + '/analyse');
   }
 }

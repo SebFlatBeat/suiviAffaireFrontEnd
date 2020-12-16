@@ -11,6 +11,7 @@ import {AnalyseService} from './services/analyse.service';
 import {CommonModule} from '@angular/common';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
+
 const appRoutes: Routes = [
   {path: 'analyse', component: AnalyseComponent},
   {path: 'synthese', component: SyntheseComponent}
@@ -21,7 +22,7 @@ const appRoutes: Routes = [
     AppComponent,
     NavigationBarComponent,
     AnalyseComponent,
-    SyntheseComponent
+    SyntheseComponent,
   ],
   imports: [
     BrowserModule,
