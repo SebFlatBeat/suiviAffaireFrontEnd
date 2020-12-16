@@ -3,6 +3,7 @@ import {AnalyseService} from '../services/analyse.service';
 import {PageableBlocage} from '../interfaces/pageableBlocage';
 
 
+
 @Component({
   selector: 'app-analyse',
   templateUrl: './analyse.component.html',
@@ -21,7 +22,7 @@ export class AnalyseComponent implements OnInit {
   }
 
   public getData(): void {
-    this.analyseService.getAnalyseSge()
+    this.analyseService.getAnalyse()
       .subscribe(data => {
         this.analysesBlocage = data;
       });

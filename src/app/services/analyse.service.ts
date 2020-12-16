@@ -15,7 +15,7 @@ export class AnalyseService {
   constructor(private http: HttpClient) {
   }
 
-  getAnalyseSge(): Observable<PageableBlocage> {
+  getAnalyse(): Observable<PageableBlocage> {
     return this.http.get<PageableBlocage>(this.apiUrl + '/analyse');
   }
 }

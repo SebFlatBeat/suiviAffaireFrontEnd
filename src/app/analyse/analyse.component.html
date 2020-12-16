@@ -4,11 +4,12 @@
       <table class="table table-hover table-bordered table-responsive-lg">
         <thead class="scroll-down">
         <tr>
-          <th class="table-light" colspan="3" scope="col"></th>
+          <th class="table-light border-bottom-dark" colspan="3" scope="col"></th>
           <th class="table-success" colspan="4" scope="col">SGE</th>
           <th class="table-warning" colspan="2" scope="col">SGO</th>
           <th class="table-info" colspan="6" scope="col">GEC</th>
-          <th class="table-danger" colspan="1" scope="col">Blocage</th>
+          <th class="table-danger" colspan="2" scope="col">Blocage</th>
+          <th class="table-light border-white" colspan="1" scope="col"></th>
         </tr>
         <tr>
           <th class="table-light" scope="col">Numéro d'affaire</th>
@@ -26,6 +27,7 @@
           <th class="table-info" scope="col">Statut DT</th>
           <th class="table-info" scope="col">Prestation réalisée</th>
           <th class="table-info" scope="col">Réalisation</th>
+          <th class="table-danger" scope="col">Origine du blocage</th>
           <th class="table-danger" scope="col">Etat</th>
 
         </tr>
@@ -47,7 +49,17 @@
           <td scope="row">{{blocage.sge.gec.statutDt}}</td>
           <td scope="row">{{blocage.sge.gec.prestationRealise}}</td>
           <td scope="row">{{blocage.sge.gec.realisation}}</td>
-          <td scope="row">{{blocage.blocageSource}}</td>
+          <td scope="row">
+            <select name="inputChoix">
+              <option value="" disabled selected>...</option>
+              <option value="SGE" [id]="blocage.id">SGE</option>
+              <option value="SGO" [id]="blocage.id">SGO</option>
+              <option value="GEC" [id]="blocage.id">GEC</option>
+              <option value="nonTraite" [id]="blocage.id">Ne pas traiter</option>
+            </select>
+          </td>
+          <td scope="row" *ngIf="blocage.blocageSource=='nonTraite'; else elseBlock">Non Traité</td>
+          <ng-template #elseBlock>{{blocage.blocageSource}}</ng-template>
         </tr>
         </tbody>
       </table>

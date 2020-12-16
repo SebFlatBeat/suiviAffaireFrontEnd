@@ -1,6 +1,7 @@
 import {Sge} from './sge';
 
-export interface Blocage{
-blocageSource: string;
-sge: Sge;
+export interface Blocage {
+  id: number;
+  blocageSource: string;
+  sge: Sge;
 }
