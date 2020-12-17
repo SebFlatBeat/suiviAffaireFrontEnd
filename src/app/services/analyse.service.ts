@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {PageableSge} from '../interfaces/pageableSge';
+import {PageableBlocage} from '../interfaces/pageableBlocage';
+
 
 
 @Injectable({
@@ -15,7 +16,10 @@ export class AnalyseService {
   constructor(private http: HttpClient) {
   }
 
-  getAnalyseSge(): Observable<PageableSge> {
-    return this.http.get<PageableSge>(this.apiUrl + '/analyse');
+  getAnalyse(): Observable<PageableBlocage> {
+    return this.http.get<PageableBlocage>(this.apiUrl + '/analyse');
+  }
+  putBlocage(id: number, choix: string): Observable<any> {
+    return this.http.put<any>(this.apiUrl + '/blocage', {}, {params: {id: '' + id, choix}});
   }
 }

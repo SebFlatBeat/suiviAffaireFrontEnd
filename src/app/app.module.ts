@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AnalyseService} from './services/analyse.service';
 import {CommonModule} from '@angular/common';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 const appRoutes: Routes = [
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
   providers: [AnalyseService],
   bootstrap: [AppComponent]

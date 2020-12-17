@@ -1,8 +1,8 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {AnalyseService} from '../services/analyse.service';
-import {PageableGec} from '../interfaces/pageableGec';
-import {PageableSge} from '../interfaces/pageableSge';
-import {PageableSgo} from '../interfaces/pageableSgo';
+import {PageableBlocage} from '../interfaces/pageableBlocage';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Blocage} from '../interfaces/blocage';
 
 
 @Component({
@@ -13,7 +13,7 @@ import {PageableSgo} from '../interfaces/pageableSgo';
 
 @Injectable()
 export class AnalyseComponent implements OnInit {
-  public analysesSge!: PageableSge;
+  public analysesBlocage!: PageableBlocage;
 
   constructor(private analyseService: AnalyseService) {
   }
@@ -23,9 +23,17 @@ export class AnalyseComponent implements OnInit {
   }
 
   public getData(): void {
-    this.analyseService.getAnalyseSge()
+    this.analyseService.getAnalyse()
       .subscribe(data => {
-        this.analysesSge = data;
+        let tab: Blocage [] = [];
+        tab = tab.concat(data.content.filter(x => x.blocageSource === 'nonTraite'));
+        tab = tab.concat(data.content.filter(x => x.blocageSource !== 'nonTraite'));
+        data.content = tab;
+        this.analysesBlocage = data;
       });
+  }
+
+  onChange(value: any, id: number): void {
+    this.analyseService.putBlocage(id, value).subscribe();
   }
 }
