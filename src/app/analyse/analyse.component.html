@@ -8,6 +8,7 @@
           <th class="table-success" colspan="4" scope="col">SGE</th>
           <th class="table-warning" colspan="2" scope="col">SGO</th>
           <th class="table-info" colspan="6" scope="col">GEC</th>
+
           <th class="table-danger" colspan="1" scope="col">BLOCAGE</th>
           <th class="table-light border-white" colspan="1" scope="col"></th>
         </tr>
@@ -27,12 +28,14 @@
           <th class="table-info" scope="col">Statut DT</th>
           <th class="table-info" scope="col">Prestation réalisée</th>
           <th class="table-info" scope="col">Réalisation</th>
+
           <th class="table-danger" scope="col">Origine du blocage</th>
 
         </tr>
         </thead>
         <tbody *ngFor="let blocage of analysesBlocage.content; let i = index" class="text-center">
         <tr>
+
           <td scope="row">{{blocage.sge.numeroAffaire}}</td>
           <td scope="row">{{blocage.sge.prm}}</td>
           <td scope="row">{{blocage.sge.idc}}</td>
@@ -57,6 +60,7 @@
               <option value="nonTraite">Ne pas traiter</option>
             </select>
           </td>
+
         </tr>
         </tbody>
       </table>
