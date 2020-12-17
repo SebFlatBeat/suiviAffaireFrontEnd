@@ -1,7 +1,8 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {AnalyseService} from '../services/analyse.service';
 import {PageableBlocage} from '../interfaces/pageableBlocage';
-
+import {FormControl, FormGroup} from '@angular/forms';
+import {Blocage} from '../interfaces/blocage';
 
 
 @Component({
@@ -24,7 +25,15 @@ export class AnalyseComponent implements OnInit {
   public getData(): void {
     this.analyseService.getAnalyse()
       .subscribe(data => {
+        let tab: Blocage [] = [];
+        tab = tab.concat(data.content.filter(x => x.blocageSource === 'nonTraite'));
+        tab = tab.concat(data.content.filter(x => x.blocageSource !== 'nonTraite'));
+        data.content = tab;
         this.analysesBlocage = data;
       });
+  }
+
+  onChange(value: any, id: number): void {
+    this.analyseService.putBlocage(id, value).subscribe();
   }
 }
