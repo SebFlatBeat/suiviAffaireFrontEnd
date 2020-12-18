@@ -11,7 +11,8 @@ export class SyntheseService {
 
   constructor(private http: HttpClient) {
   }
-  getSynthese(): Observable<Array<any>>{
+
+  getSynthese(): Observable<Array<any>> {
     return this.http.get<Array<any>>(this.apiUrl + '/synthese');
   }
 }
