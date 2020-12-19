@@ -6,24 +6,24 @@
       </mat-card-title>
     </mat-card-header>
 
-    <form class="example-form">
+    <form class="example-form" [formGroup]="registerForm">
 
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="NNI">
+          <input formControlName="NNI" matInput placeholder="NNI">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Email">
+          <input type="email" formControlName="email" matInput placeholder="Email">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mot de Passe">
+          <input type="password" formControlName="password" matInput placeholder="Mot de Passe">
         </mat-form-field>
 
       </mat-card-content>
 
-      <button mat-stroked-button color="accent" class="btn-block">S'enregister</button>
+      <button mat-stroked-button color="primary" class="btn-block">S'enregister</button>
 
     </form>
   </mat-card>
