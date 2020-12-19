@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SyntheseService} from '../services/synthese.service';
+import {ChartOptions, ChartType} from 'chart.js';
+import {Color, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+
 
 @Component({
   selector: 'app-synthese',
@@ -7,9 +11,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SyntheseComponent implements OnInit {
 
-  constructor() { }
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem?: any, data?: any) => {
+          return this.pieChartLabels[tooltipItem.index]
+            + ': ' +
+            data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+            + '%';
+        }
+      }
+    }
+  };
+  public pieChartLabels: Label[] = [['Non Traité'], ['SGE'], ['SGO'], ['GEC']];
+  public pieChartData: SingleDataSet = [];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartColors: Color[] = [
+    {backgroundColor: ['#d9534f', '#5cb85c', '#f0ad4e', '#5bc0de']}
+  ];
 
-  ngOnInit(): void {
+  constructor(private syntheseService: SyntheseService) {
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
   }
 
+  ngOnInit(): void {
+    this.getSyntheseData();
+  }
+
+  public getSyntheseData(): void {
+    this.syntheseService.getSynthese().subscribe(data =>
+      this.pieChartData = data
+    );
+  }
 }

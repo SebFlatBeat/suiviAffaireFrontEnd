@@ -1,16 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SyntheseComponent } from './synthese/synthese.component';
-import { AnalyseComponent } from './analyse/analyse.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {SyntheseComponent} from './synthese/synthese.component';
+import {AnalyseComponent} from './analyse/analyse.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {AnalyseService} from './services/analyse.service';
 import {CommonModule} from '@angular/common';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import {NavigationBarComponent} from './navigation-bar/navigation-bar.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ChartsModule} from 'ng2-charts';
 
 
 const appRoutes: Routes = [
@@ -31,9 +32,11 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [AnalyseService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
