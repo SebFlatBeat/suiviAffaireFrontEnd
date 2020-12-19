@@ -16,10 +16,10 @@ export class SyntheseComponent implements OnInit {
     tooltips: {
       callbacks: {
         label: (tooltipItem, data) => {
-         return this.pieChartLabels[tooltipItem.index]
-           + ': ' +
-           data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
-           + '%';
+          return this.pieChartLabels[tooltipItem.index]
+            + ': ' +
+            data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+            + '%';
         }
       }
     }
