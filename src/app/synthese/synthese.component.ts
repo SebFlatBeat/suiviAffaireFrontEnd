@@ -15,7 +15,7 @@ export class SyntheseComponent implements OnInit {
     responsive: true,
     tooltips: {
       callbacks: {
-        label: (tooltipItem, data) => {
+        label: (tooltipItem?: any, data?: any) => {
           return this.pieChartLabels[tooltipItem.index]
             + ': ' +
             data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
