@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   public user!: User;
   credentials = {username: '', password: ''};
+
   constructor(private formBuilder: FormBuilder, private loginService: LoginService,
               private appService: AppService, private router: Router) {
   }
@@ -30,7 +31,9 @@ export class LoginComponent implements OnInit {
   login(): boolean {
     this.appService.authenticate(this.credentials, () => {
       this.loginService.postUserLogin(this.credentials.username, this.credentials.password);
-      this.router.navigateByUrl('/');
+      if (this.appService.authenticated) {
+        this.router.navigateByUrl('/');
+      }
     });
     return false;
   }
