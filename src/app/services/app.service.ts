@@ -13,7 +13,6 @@ export class AppService {
   }
 
   authenticate(credentials: { username: any; password: any; } | undefined, callback: { (): void; (): any; } | undefined): void {
-    console.log(credentials);
     this.http.get(this.apiUrl + '/user', {params: {userApp: '' + credentials?.username}}).subscribe(response => {
       this.authenticated = !!response;
       return callback && callback();

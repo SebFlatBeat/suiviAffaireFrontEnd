@@ -30,12 +30,8 @@ export class LoginComponent implements OnInit {
   login(): boolean {
     this.appService.authenticate(this.credentials, () => {
       this.loginService.postUserLogin(this.credentials.username);
+      this.router.navigateByUrl('/');
     });
     return false;
-  }
-
-  onSubmit(username: string): void {
-    this.loginService.postUserLogin(username).subscribe();
-    console.log(username);
   }
 }
