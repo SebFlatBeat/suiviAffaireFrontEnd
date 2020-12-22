@@ -9,7 +9,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {AnalyseService} from './services/analyse.service';
 import {CommonModule} from '@angular/common';
-import {NavigationBarComponent} from './navigation-bar/navigation-bar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {SyntheseService} from './services/synthese.service';
@@ -19,10 +18,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AngularMaterialModule} from './angular-material.module';
 import {RegisterComponent} from './register/register.component';
+import {LoginService} from './services/login.service';
 
 
 const appRoutes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'login'},
+  {path: '', pathMatch: 'full', redirectTo: '/'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'analyse', component: AnalyseComponent},
@@ -32,7 +32,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationBarComponent,
     AnalyseComponent,
     SyntheseComponent,
     LoginComponent,
@@ -52,7 +51,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AngularMaterialModule,
   ],
-  providers: [AnalyseService, SyntheseService],
+  providers: [AnalyseService, SyntheseService, LoginService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

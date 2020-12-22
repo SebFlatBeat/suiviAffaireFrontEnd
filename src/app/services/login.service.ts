@@ -12,7 +12,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  getUserLogin(): Observable<User>{
-    return this.http.get<User>(this.apiUrl + '/login');
+  postUserLogin(username: string): Observable<User>{
+    return this.http.get<User>(this.apiUrl + '/user', {params: {userApp: '' + username}});
   }
 }

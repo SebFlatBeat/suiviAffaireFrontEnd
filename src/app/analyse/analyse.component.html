@@ -1,68 +1,66 @@
 <div class="container-fluid body-under-nav">
-  <div class="flex-row">
-    <div class="col-lg-auto">
-      <table class="table table-hover table-bordered table-responsive-lg">
-        <thead class="scroll-down">
-        <tr>
-          <th class="table-light" colspan="3" scope="col"></th>
-          <th class="table-success" colspan="4" scope="col">SGE</th>
-          <th class="table-warning" colspan="2" scope="col">SGO</th>
-          <th class="table-info" colspan="6" scope="col">GEC</th>
+  <table class="table table-hover table-bordered" aria-describedby="table suivi des affaires">
+    <thead class="scroll-down">
+    <tr>
+      <th class="table-light" colspan="3" scope="col"></th>
+      <th class="table-success" colspan="4" scope="col">SGE</th>
+      <th class="table-warning" colspan="2" scope="col">SGO</th>
+      <th class="table-info" colspan="6" scope="col">GEC</th>
 
-          <th class="table-danger" colspan="1" scope="col">BLOCAGE</th>
-          <th class="table-light border-white" colspan="1" scope="col"></th>
-        </tr>
-        <tr>
-          <th class="table-light" scope="col">Numéro d'affaire</th>
-          <th class="table-light" scope="col">PRM</th>
-          <th class="table-light" scope="col">IDC</th>
-          <th class="table-success" scope="col">Portefeuille</th>
-          <th class="table-success" scope="col">Prestation</th>
-          <th class="table-success" scope="col">Contrat Demandé</th>
-          <th class="table-success" scope="col">Contrat Initial</th>
-          <th class="table-warning" scope="col">Etat Affaire</th>
-          <th class="table-warning" scope="col">Intervention</th>
-          <th class="table-info" scope="col">Etat contractuel</th>
-          <th class="table-info" scope="col">Mode relève</th>
-          <th class="table-info" scope="col">Numéro DT</th>
-          <th class="table-info" scope="col">Statut DT</th>
-          <th class="table-info" scope="col">Prestation réalisée</th>
-          <th class="table-info" scope="col">Réalisation</th>
+      <th class="table-danger" colspan="1" scope="col">BLOCAGE</th>
+      <th class="table-light border-white" colspan="1" scope="col"></th>
+    </tr>
+    <tr>
+      <th class="table-light" scope="col">Numéro d'affaire</th>
+      <th class="table-light" scope="col">PRM</th>
+      <th class="table-light" scope="col">IDC</th>
+      <th class="table-success" scope="col">Portefeuille</th>
+      <th class="table-success" scope="col">Prestation</th>
+      <th class="table-success" scope="col">Contrat Demandé</th>
+      <th class="table-success" scope="col">Contrat Initial</th>
+      <th class="table-warning" scope="col">Etat Affaire</th>
+      <th class="table-warning" scope="col">Intervention</th>
+      <th class="table-info" scope="col">Etat contractuel</th>
+      <th class="table-info" scope="col">Mode relève</th>
+      <th class="table-info" scope="col">Numéro DT</th>
+      <th class="table-info" scope="col">Statut DT</th>
+      <th class="table-info" scope="col">Prestation réalisée</th>
+      <th class="table-info" scope="col">Réalisation</th>
 
-          <th class="table-danger" scope="col">Origine du blocage</th>
+      <th class="table-danger" scope="col">Origine du blocage</th>
 
-        </tr>
-        </thead>
-        <tbody *ngFor="let blocage of analysesBlocage.content; let i = index" class="text-center">
-        <tr>
+    </tr>
+    </thead>
+    <tbody *ngFor="let blocage of analysesBlocage.content; let i = index" class="text-center">
+    <tr>
 
-          <td scope="row">{{blocage.sge.numeroAffaire}}</td>
-          <td scope="row">{{blocage.sge.prm}}</td>
-          <td scope="row">{{blocage.sge.idc}}</td>
-          <td scope="row">{{blocage.sge.portefeuille}}</td>
-          <td scope="row">{{blocage.sge.prestation}}</td>
-          <td scope="row">{{blocage.sge.contratDemande}}</td>
-          <td scope="row">{{blocage.sge.contratInitial}}</td>
-          <td scope="row">{{blocage.sge.sgo.etatAffaire}}</td>
-          <td scope="row">{{blocage.sge.sgo.intervention}}</td>
-          <td scope="row">{{blocage.sge.gec.etatContractuel}}</td>
-          <td scope="row">{{blocage.sge.gec.modeReleve}}</td>
-          <td scope="row">{{blocage.sge.gec.numeroDt}}</td>
-          <td scope="row">{{blocage.sge.gec.statutDt}}</td>
-          <td scope="row">{{blocage.sge.gec.prestationRealise}}</td>
-          <td scope="row">{{blocage.sge.gec.realisation}}</td>
-          <td scope="row">
-            <select #mySelect (change)="onChange(mySelect.value, blocage.id)">
-              <option disabled selected>Non traité</option>
-              <option value="SGE">SGE</option>
-              <option value="SGO">SGO</option>
-              <option value="GEC">GEC</option>
-              <option value="nonTraite">Ne pas traiter</option>
-            </select>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+      <td>{{blocage.sge.numeroAffaire}}</td>
+      <td>{{blocage.sge.prm}}</td>
+      <td>{{blocage.sge.idc}}</td>
+      <td>{{blocage.sge.portefeuille}}</td>
+      <td>{{blocage.sge.prestation}}</td>
+      <td>{{blocage.sge.contratDemande}}</td>
+      <td>{{blocage.sge.contratInitial}}</td>
+      <td>{{blocage.sge.sgo.etatAffaire}}</td>
+      <td>{{blocage.sge.sgo.intervention}}</td>
+      <td>{{blocage.sge.gec.etatContractuel}}</td>
+      <td>{{blocage.sge.gec.modeReleve}}</td>
+      <td>{{blocage.sge.gec.numeroDt}}</td>
+      <td>{{blocage.sge.gec.statutDt}}</td>
+      <td>{{blocage.sge.gec.prestationRealise}}</td>
+      <td>{{blocage.sge.gec.realisation}}</td>
+      <td>
+        <label>
+          <select #mySelect (change)="onChange(mySelect.value, blocage.id)">
+            <option disabled selected>Non traité</option>
+            <option value="SGE">SGE</option>
+            <option value="SGO">SGO</option>
+            <option value="GEC">GEC</option>
+            <option value="nonTraite">Ne pas traiter</option>
+          </select>
+        </label>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../services/login.service';
 import {User} from '../interfaces/user';
+import {AppService} from '../services/app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +13,9 @@ import {User} from '../interfaces/user';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   public user!: User;
-
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
+  credentials = {username: '', password: ''};
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService,
+              private appService: AppService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,14 +25,17 @@ export class LoginComponent implements OnInit {
         password: [null, [Validators.required]]
       }
     );
-    this.getLogin();
   }
 
-  public getLogin(): void {
-    this.loginService.getUserLogin()
-      .subscribe(data => {
-        this.user = data;
-      });
+  login(): boolean {
+    this.appService.authenticate(this.credentials, () => {
+      this.loginService.postUserLogin(this.credentials.username);
+    });
+    return false;
   }
 
+  onSubmit(username: string): void {
+    this.loginService.postUserLogin(username).subscribe();
+    console.log(username);
+  }
 }
