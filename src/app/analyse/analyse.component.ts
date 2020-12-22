@@ -1,7 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {AnalyseService} from '../services/analyse.service';
 import {PageableBlocage} from '../interfaces/pageableBlocage';
-import {FormControl, FormGroup} from '@angular/forms';
 import {Blocage} from '../interfaces/blocage';
 
 
