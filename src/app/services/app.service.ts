@@ -8,15 +8,19 @@ import {environment} from '../../environments/environment';
 export class AppService {
   private apiUrl = environment.apiUrl;
   authenticated = false;
+  usernameSession = undefined;
 
   constructor(private http: HttpClient) {
   }
 
   authenticate(credentials: { username: any; password: any; } | undefined, callback: { (): void; (): any; } | undefined): void {
-    this.http.get(this.apiUrl + '/user', {params: {userApp: '' + credentials?.username}}).subscribe(response => {
-      this.authenticated = !!response;
-      return callback && callback();
-    });
+    this.http.get(this.apiUrl + '/user',
+      {params: {userApp: '' + credentials?.username, password: '' + credentials?.password}})
+      .subscribe(response => {
+        this.authenticated = !!response;
+        this.usernameSession = credentials?.username;
+        return callback && callback();
+      });
   }
 
 }

@@ -24,4 +24,8 @@ export class AppComponent {
   authenticated(): boolean {
     return this.app.authenticated;
   }
+
+  usernameSession(): undefined {
+    return this.app.usernameSession;
+  }
 }
