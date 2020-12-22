@@ -2,13 +2,13 @@
   <table class="table table-hover table-bordered" aria-describedby="table suivi des affaires">
     <thead class="scroll-down">
     <tr>
-      <th class="table-light" colspan="3" scope="col"></th>
+      <th class="table background" colspan="3" scope="col"></th>
       <th class="table-success" colspan="4" scope="col">SGE</th>
       <th class="table-warning" colspan="2" scope="col">SGO</th>
       <th class="table-info" colspan="6" scope="col">GEC</th>
 
       <th class="table-danger" colspan="1" scope="col">BLOCAGE</th>
-      <th class="table-light border-white" colspan="1" scope="col"></th>
+      <th class="table background border-white" colspan="1" scope="col"></th>
     </tr>
     <tr>
       <th class="table-light" scope="col">Numéro d'affaire</th>
@@ -34,22 +34,22 @@
     <tbody *ngFor="let blocage of analysesBlocage.content; let i = index" class="text-center">
     <tr>
 
-      <td>{{blocage.sge.numeroAffaire}}</td>
-      <td>{{blocage.sge.prm}}</td>
-      <td>{{blocage.sge.idc}}</td>
-      <td>{{blocage.sge.portefeuille}}</td>
-      <td>{{blocage.sge.prestation}}</td>
-      <td>{{blocage.sge.contratDemande}}</td>
-      <td>{{blocage.sge.contratInitial}}</td>
-      <td>{{blocage.sge.sgo.etatAffaire}}</td>
-      <td>{{blocage.sge.sgo.intervention}}</td>
-      <td>{{blocage.sge.gec.etatContractuel}}</td>
-      <td>{{blocage.sge.gec.modeReleve}}</td>
-      <td>{{blocage.sge.gec.numeroDt}}</td>
-      <td>{{blocage.sge.gec.statutDt}}</td>
-      <td>{{blocage.sge.gec.prestationRealise}}</td>
-      <td>{{blocage.sge.gec.realisation}}</td>
-      <td>
+      <td class="table-light">{{blocage.sge.numeroAffaire}}</td>
+      <td class="table-light">{{blocage.sge.prm}}</td>
+      <td class="table-light">{{blocage.sge.idc}}</td>
+      <td class="table-light">{{blocage.sge.portefeuille}}</td>
+      <td class="table-light">{{blocage.sge.prestation}}</td>
+      <td class="table-light">{{blocage.sge.contratDemande}}</td>
+      <td class="table-light">{{blocage.sge.contratInitial}}</td>
+      <td class="table-light">{{blocage.sge.sgo.etatAffaire}}</td>
+      <td class="table-light">{{blocage.sge.sgo.intervention}}</td>
+      <td class="table-light">{{blocage.sge.gec.etatContractuel}}</td>
+      <td class="table-light">{{blocage.sge.gec.modeReleve}}</td>
+      <td class="table-light">{{blocage.sge.gec.numeroDt}}</td>
+      <td class="table-light">{{blocage.sge.gec.statutDt}}</td>
+      <td class="table-light">{{blocage.sge.gec.prestationRealise}}</td>
+      <td class="table-light">{{blocage.sge.gec.realisation}}</td>
+      <td class="table-light">
         <label>
           <select #mySelect (change)="onChange(mySelect.value, blocage.id)">
             <option disabled selected>Non traité</option>

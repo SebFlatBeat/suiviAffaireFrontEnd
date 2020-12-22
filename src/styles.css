@@ -24,6 +24,9 @@
   position: sticky;
   display: block;
 }
-
+.background{
+  background-color: #F3EBF6;
+  border-radius: 25px;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -2,6 +2,10 @@
   padding-top: 80px;
 }
 
+.background-chart{
+  border-radius: 25px;
+  background-color: #FFFAFA;
+}
 .taille{
   height:2000px;
   width:900px;
