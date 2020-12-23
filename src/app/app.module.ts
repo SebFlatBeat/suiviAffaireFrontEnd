@@ -19,6 +19,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AngularMaterialModule} from './angular-material.module';
 import {RegisterComponent} from './register/register.component';
 import {LoginService} from './services/login.service';
+import {RegisterService} from './services/register.service';
+import {AppService} from './services/app.service';
 
 
 const appRoutes: Routes = [
@@ -51,7 +53,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AngularMaterialModule,
   ],
-  providers: [AnalyseService, SyntheseService, LoginService],
+  providers: [AnalyseService, SyntheseService, LoginService, RegisterService, AppService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
