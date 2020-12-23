@@ -2,6 +2,11 @@
   padding-top: 80px;
 }
 
+.background{
+  background-color: #F3EBF6;
+  border-radius: 25px;
+}
+
 .scroll-down {
   overflow: scroll;
 }

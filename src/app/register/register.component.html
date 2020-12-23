@@ -1,0 +1,30 @@
+<div class="login-wrapper body-under-nav" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Inscription
+        <mdb-card-img src="assets/images/inscription.png"></mdb-card-img>
+      </mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" [formGroup]="registerForm" (submit)="register()">
+
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input formControlName="NNI" [(ngModel)]="newUser.username" matInput placeholder="NNI">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input type="email" formControlName="email" [(ngModel)]="newUser.email" matInput placeholder="Email">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input type="password" formControlName="password" [(ngModel)]="newUser.password" matInput placeholder="Mot de Passe">
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <button mat-stroked-button color="primary" class="btn-block" type="submit">S'enregister</button>
+
+    </form>
+  </mat-card>
+</div>

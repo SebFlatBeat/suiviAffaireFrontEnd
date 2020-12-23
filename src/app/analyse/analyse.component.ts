@@ -1,8 +1,8 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {AnalyseService} from '../services/analyse.service';
 import {PageableBlocage} from '../interfaces/pageableBlocage';
-import {FormControl, FormGroup} from '@angular/forms';
 import {Blocage} from '../interfaces/blocage';
+import {AppService} from '../services/app.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ import {Blocage} from '../interfaces/blocage';
 export class AnalyseComponent implements OnInit {
   public analysesBlocage!: PageableBlocage;
 
-  constructor(private analyseService: AnalyseService) {
+  constructor(private analyseService: AnalyseService, private app: AppService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +34,6 @@ export class AnalyseComponent implements OnInit {
   }
 
   onChange(value: any, id: number): void {
-    this.analyseService.putBlocage(id, value).subscribe();
+    this.analyseService.putBlocage(id, value, this.app.usernameSession).subscribe();
   }
 }
