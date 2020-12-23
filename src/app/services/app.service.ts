@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
 export class AppService {
   private apiUrl = environment.apiUrl;
   authenticated = false;
-  usernameSession = undefined;
+  usernameSession = '';
 
   constructor(private http: HttpClient) {
   }

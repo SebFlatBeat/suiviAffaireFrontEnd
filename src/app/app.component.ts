@@ -25,7 +25,7 @@ export class AppComponent {
     return this.app.authenticated;
   }
 
-  usernameSession(): undefined {
+  usernameSession(): string {
     return this.app.usernameSession;
   }
 }
