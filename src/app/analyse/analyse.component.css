@@ -8,7 +8,14 @@
 }
 
 .scroll-down {
-  overflow: scroll;
+  overflow: auto;
+}
+
+table-custom
+{
+  width: 300px;
+  height: 100px;
+  overflow: auto;
 }
 
 thead th {
@@ -19,7 +26,20 @@ thead th {
   vertical-align: middle;
 }
 
+thead th:first-child {
+  left: 0;
+  z-index: 1;
+}
+
 tbody td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+tbody th {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0px;
   text-align: center;
   vertical-align: middle;
 }
@@ -27,4 +47,3 @@ tbody td {
 button{
   margin: 10px;
 }
-
