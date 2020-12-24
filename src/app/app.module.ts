@@ -21,6 +21,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {RegisterService} from './services/register.service';
 import {AppService} from './services/app.service';
+import {ToastrModule} from 'ngx-toastr';
 
 
 const appRoutes: Routes = [
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    ToastrModule.forRoot()
   ],
   providers: [AnalyseService, SyntheseService, LoginService, RegisterService, AppService, LoginComponent],
   bootstrap: [AppComponent],

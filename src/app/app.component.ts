@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
 import {AppService} from './services/app.service';
 import {LoginComponent} from './login/login.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import {LoginComponent} from './login/login.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private app: AppService, private http: HttpClient, private router: Router, private login: LoginComponent) {
+  constructor(private app: AppService, private http: HttpClient,
+              private router: Router, private login: LoginComponent, private toastr: ToastrService) {
     this.app.authenticate(undefined, undefined);
   }
 
