@@ -53,7 +53,12 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    })
   ],
   providers: [AnalyseService, SyntheseService, LoginService, RegisterService, AppService, LoginComponent],
   bootstrap: [AppComponent],
