@@ -8,6 +8,8 @@ import {Observable} from 'rxjs';
 })
 export class AppService {
   private apiUrl = environment.apiUrl;
+  authenticated = false;
+  usernameSession = '';
 
   constructor(private http: HttpClient) {
   }
@@ -18,4 +20,13 @@ export class AppService {
       {params: {userApp: '' + credentials?.username, password: '' + credentials?.password}});
   }
 
+  authenticateApp(credentials: { username: any; password: any; } |
+    undefined,    callback: { (): void; (): any; } | undefined): void {
+    this.http.get(this.apiUrl + '/user',
+      {params: {userApp: '' + credentials?.username, password: '' + credentials?.password}})
+      .subscribe(response => {
+        this.authenticated = !!response;
+        this.usernameSession = credentials?.username;
+      });
+  }
 }

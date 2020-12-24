@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../services/login.service';
 import {AppService} from '../services/app.service';
 import {Router} from '@angular/router';
 import {User} from '../interfaces/user';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,14 +31,17 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.appService.authenticate(this.credentials, () => {
-      if (this.authenticated) {
-        this.router.navigateByUrl('/');
-      }
     }).subscribe(response => {
       this.authenticated = !!response;
       this.usernameSession = this.credentials.username;
     }, (error) => {
       this.errorMessage = error.error.message;
+    }, () => {if (this.authenticated) {
+      console.log(this.authenticated);
+      this.router.navigateByUrl('/');
+    }}
+    );
+    this.appService.authenticateApp(this.credentials, () => {
     });
   }
 }

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
 import {AppService} from './services/app.service';
+import {LoginComponent} from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import {AppService} from './services/app.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private app: AppService, private http: HttpClient, private router: Router) {
+  constructor(private app: AppService, private http: HttpClient, private router: Router, private login: LoginComponent) {
     this.app.authenticate(undefined, undefined);
   }
 

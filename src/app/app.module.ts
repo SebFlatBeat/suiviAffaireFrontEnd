@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AngularMaterialModule,
   ],
-  providers: [AnalyseService, SyntheseService, LoginService, RegisterService, AppService],
+  providers: [AnalyseService, SyntheseService, LoginService, RegisterService, AppService, LoginComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
