@@ -18,6 +18,7 @@
             <input type="password" formControlName="password" [(ngModel)]="credentials.password" matInput placeholder="Mot de Passe">
           </label>
         </mat-form-field>
+        <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
       </mat-card-content>
       <button mat-stroked-button type="submit" color="primary" class="btn-block">Login</button>
     </form>

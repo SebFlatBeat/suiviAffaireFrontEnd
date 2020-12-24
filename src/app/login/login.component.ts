@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../services/login.service';
 import {AppService} from '../services/app.service';
 import {Router} from '@angular/router';
+import {User} from '../interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,9 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   credentials = {username: '', password: ''};
+  errorMessage = undefined;
+  authenticated = false;
+  usernameSession = '';
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService,
               private appService: AppService, private router: Router) {
@@ -26,13 +30,16 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  login(): boolean {
+  login(): void {
     this.appService.authenticate(this.credentials, () => {
-      this.loginService.postUserLogin(this.credentials.username, this.credentials.password);
-      if (this.appService.authenticated) {
+      if (this.authenticated) {
         this.router.navigateByUrl('/');
       }
+    }).subscribe(response => {
+      this.authenticated = !!response;
+      this.usernameSession = this.credentials.username;
+    }, (error) => {
+      this.errorMessage = error.error.message;
     });
-    return false;
   }
 }

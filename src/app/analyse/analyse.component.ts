@@ -5,6 +5,7 @@ import {Blocage} from '../interfaces/blocage';
 import {AppService} from '../services/app.service';
 
 
+
 @Component({
   selector: 'app-analyse',
   templateUrl: './analyse.component.html',

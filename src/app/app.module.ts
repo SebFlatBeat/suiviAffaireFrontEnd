@@ -13,12 +13,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {SyntheseService} from './services/synthese.service';
 import {CardsModule} from 'angular-bootstrap-md';
-import {LoginComponent} from './login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AngularMaterialModule} from './angular-material.module';
-import {RegisterComponent} from './register/register.component';
 import {LoginService} from './services/login.service';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 import {RegisterService} from './services/register.service';
 import {AppService} from './services/app.service';
 
