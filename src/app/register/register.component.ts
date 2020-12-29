@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
       this.notification.showSuccessRegister('Vous pouvez vous connecter maintenant ' + this.newUser.username, 'Enregistrement effectué');
     }, (error) => {
         this.errorMessage = error.error.message;
+        this.notification.showErrorRegister('Une erreur a été saisie', 'Attention');
     });
   }
 

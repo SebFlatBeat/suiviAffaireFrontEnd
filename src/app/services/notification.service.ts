@@ -25,4 +25,12 @@ export class NotificationService {
     this.toastr.success(message, title);
   }
 
+  showErrorRegister(message: string, title: string): void {
+    this.toastr.error(message, title);
+  }
+
+  showErrorConnexion(message: string, title: string): void {
+    this.toastr.error(message, title);
+  }
+
 }
