@@ -20,7 +20,7 @@
         <mat-form-field class="example-full-width">
           <input type="password" formControlName="password" [(ngModel)]="newUser.password" matInput placeholder="Mot de Passe">
         </mat-form-field>
-
+        <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
       </mat-card-content>
 
       <button mat-stroked-button color="primary" class="btn-block" type="submit">S'enregister</button>

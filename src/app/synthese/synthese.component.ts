@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {SyntheseService} from '../services/synthese.service';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Color, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+import 'chartjs-plugin-labels';
+
 
 
 @Component({
@@ -15,11 +17,8 @@ export class SyntheseComponent implements OnInit {
     responsive: true,
     tooltips: {
       callbacks: {
-        label: (tooltipItem?: any, data?: any) => {
-          return this.pieChartLabels[tooltipItem.index]
-            + ': ' +
-            data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
-            + '%';
+        label: (tooltipItem?: any) => {
+          return this.pieChartLabels[tooltipItem.index];
         }
       }
     }
@@ -28,10 +27,11 @@ export class SyntheseComponent implements OnInit {
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
-  public pieChartPlugins = [];
+  public pieChartPlugins: any = [];
   public pieChartColors: Color[] = [
     {backgroundColor: ['#d9534f', '#5cb85c', '#f0ad4e', '#5bc0de']}
   ];
+
 
   constructor(private syntheseService: SyntheseService) {
     monkeyPatchChartJsTooltip();
@@ -40,6 +40,7 @@ export class SyntheseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSyntheseData();
+    this.pieChartPlugins = [{label: {render: 'percentage'}}];
   }
 
   public getSyntheseData(): void {

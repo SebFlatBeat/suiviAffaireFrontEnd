@@ -3,6 +3,9 @@ import {AnalyseService} from '../services/analyse.service';
 import {PageableBlocage} from '../interfaces/pageableBlocage';
 import {Blocage} from '../interfaces/blocage';
 import {AppService} from '../services/app.service';
+import {LoginComponent} from '../login/login.component';
+import {NotificationService} from '../services/notification.service';
+
 
 
 @Component({
@@ -15,7 +18,7 @@ import {AppService} from '../services/app.service';
 export class AnalyseComponent implements OnInit {
   public analysesBlocage!: PageableBlocage;
 
-  constructor(private analyseService: AnalyseService, private app: AppService) {
+  constructor(private analyseService: AnalyseService, private login: LoginComponent, private notification: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +37,7 @@ export class AnalyseComponent implements OnInit {
   }
 
   onChange(value: any, id: number): void {
-    this.analyseService.putBlocage(id, value, this.app.usernameSession).subscribe();
+    this.analyseService.putBlocage(id, value, this.login.usernameSession).subscribe();
+    this.notification.showSuccessPut('Vous avez choisi(e) ' + value, 'Choix du blocage');
   }
 }

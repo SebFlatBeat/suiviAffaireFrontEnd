@@ -16,9 +16,9 @@
         <img src="assets/images/baseline_account_circle_black_18dp.png" alt="utilisateur">
         Login
       </button>
-      <button [hidden]="!authenticated()" class="buttonHeader btn btn-light ml-auto" routerLink="/compte" routerLinkActive="active">
+        <button [hidden]="!authenticated()" class="buttonHeader btn btn-light ml-auto" routerLink="/compte" routerLinkActive="active">
         <img src="assets/images/baseline_account_circle_black_18dp.png" alt="utilisateur">
-        {{usernameSession()}}
+        Bonjour,{{usernameSession()}}
       </button>
       <button [hidden]="!authenticated()" class="buttonHeader btn btn-light ml-auto danger" (click)="logout()">
         <img src="assets/images/baseline_power_settings_new_black_18dp.png" alt="deconnexion">

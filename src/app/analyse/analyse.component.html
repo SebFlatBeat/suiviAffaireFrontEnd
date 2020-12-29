@@ -1,8 +1,9 @@
 <div class="container-fluid body-under-nav">
-  <table class="table table-hover table-bordered" aria-describedby="table suivi des affaires">
+  <table class="table-custom table-hover table-bordered" aria-describedby="table suivi des affaires">
     <thead class="scroll-down">
     <tr>
-      <th class="table background" colspan="3" scope="col"></th>
+      <th class="table background" colspan="1" scope="col"></th>
+      <th class="table background" colspan="2" scope="col"></th>
       <th class="table-success" colspan="4" scope="col">SGE</th>
       <th class="table-warning" colspan="2" scope="col">SGO</th>
       <th class="table-info" colspan="6" scope="col">GEC</th>
@@ -26,15 +27,12 @@
       <th class="table-info" scope="col">Statut DT</th>
       <th class="table-info" scope="col">Prestation réalisée</th>
       <th class="table-info" scope="col">Réalisation</th>
-
       <th class="table-danger" scope="col">Origine du blocage</th>
-
     </tr>
     </thead>
     <tbody *ngFor="let blocage of analysesBlocage.content; let i = index" class="text-center">
     <tr>
-
-      <td class="table-light">{{blocage.sge.numeroAffaire}}</td>
+      <th class="table-light" id="sge">{{blocage.sge.numeroAffaire}}</th>
       <td class="table-light">{{blocage.sge.prm}}</td>
       <td class="table-light">{{blocage.sge.idc}}</td>
       <td class="table-light">{{blocage.sge.portefeuille}}</td>
