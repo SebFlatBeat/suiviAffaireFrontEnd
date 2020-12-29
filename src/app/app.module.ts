@@ -54,7 +54,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     AngularMaterialModule,
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 1750,
       progressBar: true,
       progressAnimation: 'increasing',
       preventDuplicates: true

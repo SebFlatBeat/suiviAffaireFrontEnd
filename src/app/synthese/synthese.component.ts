@@ -17,7 +17,7 @@ export class SyntheseComponent implements OnInit {
     responsive: true,
     tooltips: {
       callbacks: {
-        label: (tooltipItem?: any, data?: any) => {
+        label: (tooltipItem?: any) => {
           return this.pieChartLabels[tooltipItem.index];
         }
       }
@@ -27,7 +27,7 @@ export class SyntheseComponent implements OnInit {
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
-  public pieChartPlugins = [{label: {render: 'percentage'}}];
+  public pieChartPlugins: any = [];
   public pieChartColors: Color[] = [
     {backgroundColor: ['#d9534f', '#5cb85c', '#f0ad4e', '#5bc0de']}
   ];
@@ -40,6 +40,7 @@ export class SyntheseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSyntheseData();
+    this.pieChartPlugins = [{label: {render: 'percentage'}}];
   }
 
   public getSyntheseData(): void {
