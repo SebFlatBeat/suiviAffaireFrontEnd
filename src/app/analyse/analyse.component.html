@@ -1,4 +1,59 @@
 <div class="container-fluid body-under-nav">
+  <section id="search">
+    <div class="row border-box">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-4">
+            <label id="numeroAffaire">
+              Saisissez le n° d'affaire :
+              <input type="text" placeholder="A00AAAAA" class="text-center"/>
+            </label>
+          </div>
+          <div class="col-lg-4">
+            <label id="prm">
+              Saisissez le PRM :
+              <input type="number" placeholder="10000010000010" class="text-center"/>
+            </label>
+          </div>
+          <div class="col-lg-4">
+            <label id="idc">
+              Saisissez l'IDC :
+              <input type="number" placeholder="9200000" class="text-center"/>
+            </label>
+          </div>
+        </div>
+      </div>
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-3">
+              <label id="portefeuille">
+                Portefeuille :
+                <select></select>
+              </label>
+            </div>
+            <div class="col-lg-3">
+              <label id="etatAffaire">
+                Etat de l'affaire :
+                <select></select>
+              </label>
+            </div>
+            <div class="col-lg-3">
+              <label id="etatContractuel">
+                Etat contractuel :
+                <select></select>
+              </label>
+            </div>
+            <div class="col-lg-3">
+              <label id="blocage">
+                Etat blocage :
+                <select></select>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    <button type="submit" class="btn btn-outline-primary btn-sm float-sm-right">Chercher</button>
+  </section>
   <table class="table-custom table-hover table-bordered" aria-describedby="table suivi des affaires">
     <thead class="scroll-down">
     <tr>
@@ -61,4 +116,23 @@
     </tr>
     </tbody>
   </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+      <p>nombre d'éléments affichés</p>
+      <select>
+        <option value="5">5</option>
+        <option value="15">15</option>
+        <option value="25">25</option>
+      </select>
+    </ul>
+  </nav>
 </div>
