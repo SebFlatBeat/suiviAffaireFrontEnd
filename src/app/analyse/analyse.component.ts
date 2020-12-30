@@ -38,6 +38,10 @@ export class AnalyseComponent implements OnInit {
 
   onChange(value: any, id: number): void {
     this.analyseService.putBlocage(id, value, this.login.usernameSession).subscribe();
+    if (value !== 'nonTraite'){
     this.notification.showSuccessPut('Vous avez choisi(e) ' + value, 'Choix du blocage');
+    }else {
+      this.notification.showWarnPut('Vous avez choisi(e) ne pas traiter', 'Choix du blocage');
+    }
   }
 }
