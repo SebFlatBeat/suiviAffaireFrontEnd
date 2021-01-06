@@ -44,4 +44,8 @@ export class AnalyseComponent implements OnInit {
       this.notification.showWarnPut('Vous avez choisi(e) ne pas traiter', 'Choix du blocage');
     }
   }
+
+  onPagination(value: any): void{
+
+  }
 }
