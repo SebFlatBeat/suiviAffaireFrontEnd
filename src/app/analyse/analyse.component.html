@@ -1,64 +1,86 @@
 <div class="container-fluid body-under-nav">
   <section id="search">
-    <div class="row border-box">
+    <mat-card class="row border-box">
       <div class="col-lg-12">
         <div class="row">
           <div class="col-lg-4">
-            <label id="numeroAffaire">
-              Saisissez le n° d'affaire :
-              <input type="text" placeholder="A00AAAAA" class="text-center"/>
-            </label>
+            <mat-form-field appearance="outline">
+              <mat-label>Numéro d'Affaire</mat-label>
+              <input matInput type="text" placeholder="A00AAAAA" class="text-center"/>
+            </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <label id="prm">
-              Saisissez le PRM :
-              <input type="number" placeholder="10000010000010" class="text-center"/>
-            </label>
+            <mat-form-field appearance="outline">
+              <mat-label>PRM</mat-label>
+              <input matInput type="number" placeholder="10000010000010" class="text-center"/>
+            </mat-form-field>
           </div>
           <div class="col-lg-4">
-            <label id="idc">
-              Saisissez l'IDC :
-              <input type="number" placeholder="9200000" class="text-center"/>
-            </label>
+            <mat-form-field appearance="outline">
+              <mat-label>IDC</mat-label>
+              <input matInput type="number" placeholder="9200000" class="text-center"/>
+            </mat-form-field>
           </div>
         </div>
       </div>
       <div class="col-lg-12">
         <div class="row">
           <div class="col-lg-3">
-            <label id="portefeuille">
-              Portefeuille :
-              <select></select>
-            </label>
+            <mat-form-field appearance="outline">
+              <mat-label>Portefeuille</mat-label>
+              <input type="text" placeholder="Portefeuille" aria-label="portefeuille" matInput
+                     [formControl]="myPortefeuilleControl" [matAutocomplete]="autoPortefeuille">
+              <mat-autocomplete #autoPortefeuille="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsPortefeuille | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
           <div class="col-lg-3">
-            <label id="etatAffaire">
-              Etat de l'affaire :
-              <select></select>
-            </label>
+            <mat-form-field appearance="outline">
+              <mat-label>Etat de l'affaire</mat-label>
+              <input type="text" placeholder="Etat de l'affaire" aria-label="etatAffaire" matInput
+                     [formControl]="myEtatAffaireControl" [matAutocomplete]="autoEtatAffaire">
+              <mat-autocomplete #autoEtatAffaire="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsEtatAffaire | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
           <div class="col-lg-3">
-            <label id="etatContractuel">
-              Etat contractuel :
-              <select></select>
-            </label>
+            <mat-form-field appearance="outline">
+              <mat-label>Etat Contractuel</mat-label>
+              <input type="text" placeholder="Etat contractuel" aria-label="etatContractuel" matInput
+                     [formControl]="myEtatContractuelControl" [matAutocomplete]="autoEtatContractuel">
+              <mat-autocomplete #autoEtatContractuel="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsEtatContractuel | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
           <div class="col-lg-3">
-            <label id="blocage">
-              Etat blocage :
-              <select>
-                <option disabled selected></option>
-                <option value="SGE">SGE</option>
-                <option value="SGO">SGO</option>
-                <option value="GEC">GEC</option>
-                <option value="nonTraite">Ne pas traiter</option>
-              </select>
-            </label>
+            <mat-form-field appearance="outline">
+              <mat-label>Etat Blocage</mat-label>
+              <input type="text" placeholder="Etat blocage" aria-label="blocage" matInput
+                     [formControl]="myBlocageControl"
+                     [matAutocomplete]="autoBlocage">
+              <mat-autocomplete autoActiveFirstOption #autoBlocage="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptionsBlocage | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
         </div>
       </div>
-    </div>
-    <button type="submit" class="btn btn-outline-primary btn-sm float-sm-right">Chercher</button>
+      <div class="col-lg-12">
+        <button mat-raised-button color="primary" type="submit" class="btn-block">Chercher</button>
+      </div>
+    </mat-card>
+    <button type="submit" class="btn btn-outline-danger btn-sm float-sm-right">Masquer</button>
   </section>
   <table class="table-custom table-hover table-bordered" aria-describedby="table suivi des affaires">
     <thead class="scroll-down">
