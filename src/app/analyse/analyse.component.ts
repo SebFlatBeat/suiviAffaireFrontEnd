@@ -33,6 +33,7 @@ export class AnalyseComponent implements OnInit {
   myPortefeuilleControl = new FormControl();
   optionsPortefeuille: string[] = ['IDF', 'OUEST', 'NORD EST', 'SUD'];
   filteredOptionsPortefeuille: Observable<string[]> | any;
+  onOff = false;
 
   constructor(private analyseService: AnalyseService, private login: LoginComponent, private notification: NotificationService) {
   }
@@ -103,5 +104,13 @@ export class AnalyseComponent implements OnInit {
     const filterValuePortefeuille = value.toLowerCase();
     return this.optionsPortefeuille.filter(option => option.toLowerCase()
       .indexOf(filterValuePortefeuille) === 0);
+  }
+
+  searchOn(): void {
+    this.onOff = true;
+  }
+
+  searchOff(): void {
+    this.onOff = false;
   }
 }
