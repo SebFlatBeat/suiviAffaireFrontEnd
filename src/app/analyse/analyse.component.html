@@ -1,88 +1,96 @@
 <div class="container-fluid body-under-nav">
   <section id="search" [hidden]="!onOff">
     <mat-card class="row border-box">
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-4">
-            <mat-form-field appearance="outline">
-              <mat-label>Numéro d'Affaire</mat-label>
-              <input matInput type="text" placeholder="A00AAAAA" class="text-center"/>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-4">
-            <mat-form-field appearance="outline">
-              <mat-label>PRM</mat-label>
-              <input matInput type="number" placeholder="10000010000010" class="text-center"/>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-4">
-            <mat-form-field appearance="outline">
-              <mat-label>IDC</mat-label>
-              <input matInput type="number" placeholder="9200000" class="text-center"/>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-              <mat-label>Portefeuille</mat-label>
-              <input type="text" placeholder="Portefeuille" aria-label="portefeuille" matInput
-                     [formControl]="myPortefeuilleControl" [matAutocomplete]="autoPortefeuille">
-              <mat-autocomplete #autoPortefeuille="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptionsPortefeuille | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-              <mat-label>Etat de l'affaire</mat-label>
-              <input type="text" placeholder="Etat de l'affaire" aria-label="etatAffaire" matInput
-                     [formControl]="myEtatAffaireControl" [matAutocomplete]="autoEtatAffaire">
-              <mat-autocomplete #autoEtatAffaire="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptionsEtatAffaire | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-              <mat-label>Etat Contractuel</mat-label>
-              <input type="text" placeholder="Etat contractuel" aria-label="etatContractuel" matInput
-                     [formControl]="myEtatContractuelControl" [matAutocomplete]="autoEtatContractuel">
-              <mat-autocomplete #autoEtatContractuel="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptionsEtatContractuel | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-              <mat-label>Etat Blocage</mat-label>
-              <input type="text" placeholder="Etat blocage" aria-label="blocage" matInput
-                     [formControl]="myBlocageControl"
-                     [matAutocomplete]="autoBlocage">
-              <mat-autocomplete autoActiveFirstOption #autoBlocage="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptionsBlocage | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+      <form class="example-form" [formGroup]="searchForm" (submit)="search()">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Numéro d'Affaire</mat-label>
+                <input matInput type="text" placeholder="A00AAAAA" class="text-center"
+                       [(ngModel)]="newSearch.numeroAffaire" [ngModelOptions]="{standalone: true}"/>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+              <mat-form-field appearance="outline">
+                <mat-label>PRM</mat-label>
+                <input matInput type="number" placeholder="10000010000010" class="text-center"
+                       [(ngModel)]="newSearch.prm" [ngModelOptions]="{standalone: true}"/>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+              <mat-form-field appearance="outline">
+                <mat-label>IDC</mat-label>
+                <input matInput type="number" placeholder="9200000" class="text-center" [(ngModel)]="newSearch.idc"
+                       [ngModelOptions]="{standalone: true}"/>
+              </mat-form-field>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-12">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Portefeuille</mat-label>
+                <input type="text" placeholder="Portefeuille" aria-label="portefeuille" matInput
+                       [formControl]="myPortefeuilleControl" [matAutocomplete]="autoPortefeuille"
+                       [(ngModel)]="newSearch.portefeuille">
+                <mat-autocomplete #autoPortefeuille="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsPortefeuille | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Etat de l'affaire</mat-label>
+                <input type="text" placeholder="Etat de l'affaire" aria-label="etatAffaire" matInput
+                       [formControl]="myEtatAffaireControl" [matAutocomplete]="autoEtatAffaire"
+                       [(ngModel)]="newSearch.etatAffaire">
+                <mat-autocomplete #autoEtatAffaire="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsEtatAffaire | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Etat Contractuel</mat-label>
+                <input type="text" placeholder="Etat contractuel" aria-label="etatContractuel" matInput
+                       [formControl]="myEtatContractuelControl" [matAutocomplete]="autoEtatContractuel"
+                       [(ngModel)]="newSearch.etatContractuel">
+                <mat-autocomplete #autoEtatContractuel="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsEtatContractuel | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Etat Blocage</mat-label>
+                <input type="text" placeholder="Etat blocage" aria-label="blocage" matInput
+                       [formControl]="myBlocageControl"
+                       [matAutocomplete]="autoBlocage" [(ngModel)]="newSearch.blocageSource">
+                <mat-autocomplete autoActiveFirstOption #autoBlocage="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsBlocage | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
         <button mat-raised-button color="primary" type="submit" class="btn-block">Chercher</button>
-      </div>
+      </form>
     </mat-card>
     <button type="submit" class="btn btn-outline-danger btn-sm float-sm-right" (click)="searchOff()">Masquer</button>
   </section>
-  <button [hidden]="onOff" type="submit" class="btn btn-outline-success btn-sm btn-block" (click)="searchOn()">Rechercher</button>
+  <button [hidden]="onOff" type="submit" class="btn btn-outline-success btn-sm btn-block" (click)="searchOn()">
+    Rechercher
+  </button>
   <table class="table-custom table-hover table-bordered" aria-describedby="table suivi des affaires">
     <thead class="scroll-down">
     <tr>
@@ -138,34 +146,16 @@
             <option value="SGE">SGE</option>
             <option value="SGO">SGO</option>
             <option value="GEC">GEC</option>
-            <option value="nonTraite">Ne pas traiter</option>
+            <option value="NONTRAITE">Ne pas traiter</option>
           </select>
         </label>
       </td>
     </tr>
     </tbody>
   </table>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-    <p class="float-right">nombre d'éléments affichés
-      <label id="size">
-        <select #myPagination (change)="onPagination(myPagination.value)">
-          <option value="5">5</option>
-          <option value="15">15</option>
-          <option value="25">25</option>
-        </select>
-      </label>
-    </p>
-  </nav>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="5" [length]="totalElements"
+                 (page)="nextPage($event)">
+
+  </mat-paginator>
 </div>
 

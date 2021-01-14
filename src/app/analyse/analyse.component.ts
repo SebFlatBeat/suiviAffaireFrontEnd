@@ -2,12 +2,12 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {AnalyseService} from '../services/analyse.service';
 import {PageableBlocage} from '../interfaces/pageableBlocage';
 import {Blocage} from '../interfaces/blocage';
-import {AppService} from '../services/app.service';
 import {LoginComponent} from '../login/login.component';
 import {NotificationService} from '../services/notification.service';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {PageEvent} from '@angular/material/paginator';
 
 
 @Component({
@@ -28,14 +28,22 @@ export class AnalyseComponent implements OnInit {
     'Solde à corriger'];
   filteredOptionsEtatAffaire: Observable<string[]> | any;
   myEtatContractuelControl = new FormControl();
-  optionsEtatContractuel: string[] = [ 'En service', 'Inactif'];
+  optionsEtatContractuel: string[] = ['En service', 'Inactif'];
   filteredOptionsEtatContractuel: Observable<string[]> | any;
   myPortefeuilleControl = new FormControl();
   optionsPortefeuille: string[] = ['IDF', 'OUEST', 'NORD EST', 'SUD'];
   filteredOptionsPortefeuille: Observable<string[]> | any;
   onOff = false;
+  searchForm!: FormGroup;
+  newSearch = {
+    numeroAffaire: '', prm: '', idc: '', portefeuille: '',
+    etatAffaire: '', etatContractuel: '', blocageSource: ''
+  };
+  totalElements = 0;
+  loading!: boolean;
 
-  constructor(private analyseService: AnalyseService, private login: LoginComponent, private notification: NotificationService) {
+  constructor(private analyseService: AnalyseService, private login: LoginComponent,
+              private notification: NotificationService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -56,14 +64,26 @@ export class AnalyseComponent implements OnInit {
       startWith(''),
       map(value => this._filterPortefeuille(value))
     );
+    this.searchForm = this.formBuilder.group(
+      {
+        numeroAffaire: [null],
+        prm: [null],
+        idc: [null],
+        portefeuille: [null],
+        etatAffaire: [null],
+        etatContractuel: [null],
+        etatBlocage: [null]
+      }
+    );
+    this.getBlocage({page: '0', size: '5'});
   }
 
   public getData(): void {
     this.analyseService.getAnalyse()
       .subscribe(data => {
         let tab: Blocage [] = [];
-        tab = tab.concat(data.content.filter(x => x.blocageSource === 'nonTraite'));
-        tab = tab.concat(data.content.filter(x => x.blocageSource !== 'nonTraite'));
+        tab = tab.concat(data.content.filter(x => x.blocageSource === 'NONTRAITE'));
+        tab = tab.concat(data.content.filter(x => x.blocageSource !== 'NONTRAITE'));
         data.content = tab;
         this.analysesBlocage = data;
       });
@@ -71,15 +91,11 @@ export class AnalyseComponent implements OnInit {
 
   onChange(value: any, id: number): void {
     this.analyseService.putBlocage(id, value, this.login.usernameSession).subscribe();
-    if (value !== 'nonTraite') {
+    if (value !== 'NONTRAITE') {
       this.notification.showSuccessPut('Vous avez choisi(e) ' + value, 'Choix du blocage');
     } else {
       this.notification.showWarnPut('Vous avez choisi(e) ne pas traiter', 'Choix du blocage');
     }
-  }
-
-  onPagination(value: any): void {
-
   }
 
   private _filterBlocage(value: string): string[] {
@@ -112,5 +128,36 @@ export class AnalyseComponent implements OnInit {
 
   searchOff(): void {
     this.onOff = false;
+  }
+
+  search(): void {
+    this.analyseService.postSearch(this.newSearch.numeroAffaire, this.newSearch.prm, this.newSearch.idc,
+      this.newSearch.portefeuille, this.newSearch.etatAffaire, this.newSearch.etatContractuel,
+      this.newSearch.blocageSource).subscribe((data) => {
+      this.notification.showSuccessSearch('Votre recherche est effectuée', 'Recherche');
+      this.analysesBlocage = data;
+    });
+  }
+
+  private getBlocage(request: any): void {
+    this.loading = true;
+    this.analyseService.listBlocage(request)
+      .subscribe(data => {
+        this.analysesBlocage = data;
+        this.totalElements = data.totalElements;
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+      });
+  }
+
+  nextPage(event: PageEvent): void {
+    const request = {
+      page: toString(),
+      size: toString()
+    };
+    request.page = event.pageIndex.toString();
+    request.size = event.pageSize.toString();
+    this.getBlocage(request);
   }
 }

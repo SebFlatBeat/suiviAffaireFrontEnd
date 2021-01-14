@@ -37,4 +37,8 @@ export class NotificationService {
     this.toastr.error(message, title);
   }
 
+  showSuccessSearch(message: string, title: string): void {
+  this.toastr.success(message, title);
+  }
+
 }

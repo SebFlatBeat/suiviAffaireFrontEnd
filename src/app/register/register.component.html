@@ -18,7 +18,8 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <input type="password" formControlName="password" [(ngModel)]="newUser.password" matInput placeholder="Mot de Passe">
+          <input type="password" formControlName="password" [(ngModel)]="newUser.password" matInput
+                 placeholder="Mot de Passe">
         </mat-form-field>
         <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
       </mat-card-content>
