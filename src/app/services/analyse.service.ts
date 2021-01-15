@@ -25,19 +25,30 @@ export class AnalyseService {
       {params: {id: '' + id, choix: '' + choix, username: '' + this.appService.usernameSession}});
   }
 
-  postSearch(numeroAffaire: string, prm: string, idc: string, portefeuille: string,
-             etatAffaire: string, etatContractuel: string, blocageSource: string): Observable<PageableBlocage> {
-    return this.http.post<PageableBlocage>(this.apiUrl + '/filter',
+  getSearch(numeroAffaire: string, prm: string, idc: string, portefeuille: string,
+            etatAffaire: string, etatContractuel: string, blocageSource: string,
+            page: number, size: number): Observable<PageableBlocage> {
+    // @ts-ignore
+    return this.http.get<PageableBlocage>(this.apiUrl + '/filter',
       {
-        numeroAffaire, prm, idc,
-        portefeuille, etatAffaire,
-        etatContractuel, blocageSource
+        params: {
+          numeroAffaire, prm, idc,
+          portefeuille, etatAffaire,
+          etatContractuel, blocageSource,
+          page, size
+        }
       });
   }
 
-  listBlocage(request: any): Observable<any>{
+  listBlocage(request: any): Observable<any> {
     const endpoint = this.apiUrl + '/analyse';
     const params = request;
-    return this.http.get(endpoint, { params });
+    return this.http.get(endpoint, {params});
+  }
+
+  listBlocageFilter(request: any): Observable<any> {
+    const endpoint = this.apiUrl + '/filter';
+    const params = request;
+    return this.http.get(endpoint, {params});
   }
 }

@@ -86,7 +86,8 @@
         <button mat-raised-button color="primary" type="submit" class="btn-block">Chercher</button>
       </form>
     </mat-card>
-    <button type="submit" class="btn btn-outline-warning btn-sm float-sm-right" (click)="getData()">Réinitialiser</button>
+    <button type="submit" class="btn btn-outline-warning btn-sm float-sm-right" (click)="reInit()">Réinitialiser
+    </button>
     <button type="submit" class="btn btn-outline-danger btn-sm float-sm-right" (click)="searchOff()">Masquer</button>
   </section>
   <button [hidden]="onOff" type="submit" class="btn btn-outline-success btn-sm btn-block" (click)="searchOn()">
@@ -98,11 +99,10 @@
       <th class="table background" colspan="1" scope="col"></th>
       <th class="table background" colspan="2" scope="col"></th>
       <th class="table-success" colspan="4" scope="col">SGE</th>
-      <th class="table-warning" colspan="2" scope="col">SGO</th>
+      <th class="table-warning" colspan="2" scope="col">COSY</th>
       <th class="table-info" colspan="6" scope="col">GEC</th>
 
-      <th class="table-danger" colspan="1" scope="col">BLOCAGE</th>
-      <th class="table background border-white" colspan="1" scope="col"></th>
+      <th class="table-danger" colspan="2" scope="col">BLOCAGE</th>
     </tr>
     <tr>
       <th class="table-light" scope="col">Numéro d'affaire</th>
@@ -121,6 +121,7 @@
       <th class="table-info" scope="col">Prestation réalisée</th>
       <th class="table-info" scope="col">Réalisation</th>
       <th class="table-danger" scope="col">Origine du blocage</th>
+      <th class="table-danger" scope="col">Modifié par</th>
     </tr>
     </thead>
     <tbody *ngFor="let blocage of analysesBlocage.content; let i = index" class="text-center">
@@ -132,8 +133,8 @@
       <td class="table-light">{{blocage.sge.prestation}}</td>
       <td class="table-light">{{blocage.sge.contratDemande}}</td>
       <td class="table-light">{{blocage.sge.contratInitial}}</td>
-      <td class="table-light">{{blocage.sge.sgo.etatAffaire}}</td>
-      <td class="table-light">{{blocage.sge.sgo.intervention}}</td>
+      <td class="table-light">{{blocage.sge.cosy.etatAffaire}}</td>
+      <td class="table-light">{{blocage.sge.cosy.intervention}}</td>
       <td class="table-light">{{blocage.sge.gec.etatContractuel}}</td>
       <td class="table-light">{{blocage.sge.gec.modeReleve}}</td>
       <td class="table-light">{{blocage.sge.gec.numeroDt}}</td>
@@ -145,18 +146,19 @@
           <select #mySelect (change)="onChange(mySelect.value, blocage.id)">
             <option disabled selected>Non traité</option>
             <option value="SGE">SGE</option>
-            <option value="SGO">SGO</option>
+            <option value="COSY">COSY</option>
             <option value="GEC">GEC</option>
             <option value="NONTRAITE">Ne pas traiter</option>
           </select>
         </label>
       </td>
+      <td class="table-light" *ngIf="blocage.userApp != null">{{blocage.userApp.username}}</td>
+      <td class="table-light" *ngIf="blocage.userApp == null">Personne</td>
     </tr>
     </tbody>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="5" [length]="totalElements"
+  <mat-paginator [pageSizeOptions]="[3 ,5, 10, 25]" [pageSize]="3" [length]="totalElements"
                  (page)="nextPage($event)">
-
   </mat-paginator>
 </div>
 

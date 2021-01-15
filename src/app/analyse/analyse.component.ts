@@ -19,20 +19,25 @@ import {PageEvent} from '@angular/material/paginator';
 @Injectable()
 export class AnalyseComponent implements OnInit {
   public analysesBlocage!: PageableBlocage;
+
   myBlocageControl = new FormControl();
-  optionsBlocage: string[] = ['SGE', 'SGO', 'GEC', 'Ne pas traiter'];
+  optionsBlocage: string[] = ['SGE', 'COSY', 'GEC', 'Ne pas traiter'];
   filteredOptionsBlocage: Observable<string[]> | any;
+
   myEtatAffaireControl = new FormControl();
   optionsEtatAffaire: string[] = ['Close, prestation réalisée', 'Demande reçue', 'En cours de clôture',
     'Intervention planifiée', 'Planification en cours', 'Recevabilité en cours', 'Replanification demandée',
     'Solde à corriger'];
   filteredOptionsEtatAffaire: Observable<string[]> | any;
+
   myEtatContractuelControl = new FormControl();
-  optionsEtatContractuel: string[] = ['En service', 'Inactif'];
+  optionsEtatContractuel: string[] = ['SERVC', 'INACTIF'];
   filteredOptionsEtatContractuel: Observable<string[]> | any;
+
   myPortefeuilleControl = new FormControl();
   optionsPortefeuille: string[] = ['IDF', 'OUEST', 'NORD EST', 'SUD'];
   filteredOptionsPortefeuille: Observable<string[]> | any;
+
   onOff = false;
   searchForm!: FormGroup;
   newSearch = {
@@ -42,12 +47,14 @@ export class AnalyseComponent implements OnInit {
   totalElements = 0;
   loading!: boolean;
 
+  page = 0;
+  size = 5;
+
   constructor(private analyseService: AnalyseService, private login: LoginComponent,
               private notification: NotificationService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.getData();
     this.filteredOptionsBlocage = this.myBlocageControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterBlocage(value))
@@ -75,7 +82,7 @@ export class AnalyseComponent implements OnInit {
         etatBlocage: [null]
       }
     );
-    this.getBlocage({page: '0', size: '5'});
+    this.search();
   }
 
   public getData(): void {
@@ -131,11 +138,11 @@ export class AnalyseComponent implements OnInit {
   }
 
   search(): void {
-    this.analyseService.postSearch(this.newSearch.numeroAffaire, this.newSearch.prm, this.newSearch.idc,
+    this.analyseService.getSearch(this.newSearch.numeroAffaire, this.newSearch.prm, this.newSearch.idc,
       this.newSearch.portefeuille, this.newSearch.etatAffaire, this.newSearch.etatContractuel,
-      this.newSearch.blocageSource).subscribe((data) => {
-      this.notification.showSuccessSearch('Votre recherche est effectuée', 'Recherche');
+      this.newSearch.blocageSource, this.page, this.size).subscribe((data) => {
       this.analysesBlocage = data;
+      this.totalElements = data.totalElements;
     });
   }
 
@@ -152,12 +159,14 @@ export class AnalyseComponent implements OnInit {
   }
 
   nextPage(event: PageEvent): void {
-    const request = {
-      page: toString(),
-      size: toString()
-    };
-    request.page = event.pageIndex.toString();
-    request.size = event.pageSize.toString();
-    this.getBlocage(request);
+    this.page = event.pageIndex;
+    this.size = event.pageSize;
+    this.search();
+  }
+
+  reInit(): void{
+    this.getData();
+    this.searchOff();
+    this.notification.showWarnSearch('Remise à zéro', 'Recherche');
   }
 }
