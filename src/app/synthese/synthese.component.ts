@@ -23,7 +23,7 @@ export class SyntheseComponent implements OnInit {
       }
     }
   };
-  public pieChartLabels: Label[] = [['Non Traité'], ['SGE'], ['SGO'], ['GEC']];
+  public pieChartLabels: Label[] = [['Non Traité'], ['SGE'], ['COSY'], ['GEC']];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;

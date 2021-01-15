@@ -1,5 +1,5 @@
 import {Gec} from './gec';
-import {Sgo} from './sgo';
+import {Cosy} from './cosy';
 
 export interface Sge{
   contratDemande: string;
@@ -11,5 +11,5 @@ export interface Sge{
   prestation: string;
   prm: number;
   gec: Gec;
-  sgo: Sgo;
+  cosy: Cosy;
 }

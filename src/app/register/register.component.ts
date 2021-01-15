@@ -5,7 +5,6 @@ import {RegisterService} from '../services/register.service';
 import {NotificationService} from '../services/notification.service';
 
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -36,8 +35,8 @@ export class RegisterComponent implements OnInit {
       this.router.navigateByUrl('/login');
       this.notification.showSuccessRegister('Vous pouvez vous connecter maintenant ' + this.newUser.username, 'Enregistrement effectué');
     }, (error) => {
-        this.errorMessage = error.error.message;
-        this.notification.showErrorRegister('Une erreur a été saisie', 'Attention');
+      this.errorMessage = error.error.message;
+      this.notification.showErrorRegister('Une erreur a été saisie', 'Attention');
     });
   }
 

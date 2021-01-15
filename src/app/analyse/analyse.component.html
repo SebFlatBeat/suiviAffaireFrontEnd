@@ -1,15 +1,108 @@
 <div class="container-fluid body-under-nav">
+  <section id="search" [hidden]="!onOff">
+    <mat-card class="row border-box">
+      <form class="example-form" [formGroup]="searchForm" (submit)="search()">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Numéro d'Affaire</mat-label>
+                <input matInput type="text" placeholder="A00AAAAA" class="text-center"
+                       [(ngModel)]="newSearch.numeroAffaire" [ngModelOptions]="{standalone: true}"/>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+              <mat-form-field appearance="outline">
+                <mat-label>PRM</mat-label>
+                <input matInput type="number" placeholder="10000010000010" class="text-center"
+                       [(ngModel)]="newSearch.prm" [ngModelOptions]="{standalone: true}"/>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+              <mat-form-field appearance="outline">
+                <mat-label>IDC</mat-label>
+                <input matInput type="number" placeholder="9200000" class="text-center" [(ngModel)]="newSearch.idc"
+                       [ngModelOptions]="{standalone: true}"/>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Portefeuille</mat-label>
+                <input type="text" placeholder="Portefeuille" aria-label="portefeuille" matInput
+                       [formControl]="myPortefeuilleControl" [matAutocomplete]="autoPortefeuille"
+                       [(ngModel)]="newSearch.portefeuille">
+                <mat-autocomplete #autoPortefeuille="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsPortefeuille | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Etat de l'affaire</mat-label>
+                <input type="text" placeholder="Etat de l'affaire" aria-label="etatAffaire" matInput
+                       [formControl]="myEtatAffaireControl" [matAutocomplete]="autoEtatAffaire"
+                       [(ngModel)]="newSearch.etatAffaire">
+                <mat-autocomplete #autoEtatAffaire="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsEtatAffaire | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Etat Contractuel</mat-label>
+                <input type="text" placeholder="Etat contractuel" aria-label="etatContractuel" matInput
+                       [formControl]="myEtatContractuelControl" [matAutocomplete]="autoEtatContractuel"
+                       [(ngModel)]="newSearch.etatContractuel">
+                <mat-autocomplete #autoEtatContractuel="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsEtatContractuel | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Etat Blocage</mat-label>
+                <input type="text" placeholder="Etat blocage" aria-label="blocage" matInput
+                       [formControl]="myBlocageControl"
+                       [matAutocomplete]="autoBlocage" [(ngModel)]="newSearch.blocageSource">
+                <mat-autocomplete autoActiveFirstOption #autoBlocage="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsBlocage | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <button mat-raised-button color="primary" type="submit" class="btn-block">Chercher</button>
+      </form>
+    </mat-card>
+    <button type="submit" class="btn btn-outline-warning btn-sm float-sm-right" (click)="reInit()">Réinitialiser
+    </button>
+    <button type="submit" class="btn btn-outline-danger btn-sm float-sm-right" (click)="searchOff()">Masquer</button>
+  </section>
+  <button [hidden]="onOff" type="submit" class="btn btn-outline-success btn-sm btn-block" (click)="searchOn()">
+    Rechercher
+  </button>
   <table class="table-custom table-hover table-bordered" aria-describedby="table suivi des affaires">
     <thead class="scroll-down">
     <tr>
       <th class="table background" colspan="1" scope="col"></th>
       <th class="table background" colspan="2" scope="col"></th>
       <th class="table-success" colspan="4" scope="col">SGE</th>
-      <th class="table-warning" colspan="2" scope="col">SGO</th>
+      <th class="table-warning" colspan="2" scope="col">COSY</th>
       <th class="table-info" colspan="6" scope="col">GEC</th>
 
-      <th class="table-danger" colspan="1" scope="col">BLOCAGE</th>
-      <th class="table background border-white" colspan="1" scope="col"></th>
+      <th class="table-danger" colspan="2" scope="col">BLOCAGE</th>
     </tr>
     <tr>
       <th class="table-light" scope="col">Numéro d'affaire</th>
@@ -28,6 +121,7 @@
       <th class="table-info" scope="col">Prestation réalisée</th>
       <th class="table-info" scope="col">Réalisation</th>
       <th class="table-danger" scope="col">Origine du blocage</th>
+      <th class="table-danger" scope="col">Modifié par</th>
     </tr>
     </thead>
     <tbody *ngFor="let blocage of analysesBlocage.content; let i = index" class="text-center">
@@ -39,8 +133,8 @@
       <td class="table-light">{{blocage.sge.prestation}}</td>
       <td class="table-light">{{blocage.sge.contratDemande}}</td>
       <td class="table-light">{{blocage.sge.contratInitial}}</td>
-      <td class="table-light">{{blocage.sge.sgo.etatAffaire}}</td>
-      <td class="table-light">{{blocage.sge.sgo.intervention}}</td>
+      <td class="table-light">{{blocage.sge.cosy.etatAffaire}}</td>
+      <td class="table-light">{{blocage.sge.cosy.intervention}}</td>
       <td class="table-light">{{blocage.sge.gec.etatContractuel}}</td>
       <td class="table-light">{{blocage.sge.gec.modeReleve}}</td>
       <td class="table-light">{{blocage.sge.gec.numeroDt}}</td>
@@ -52,13 +146,19 @@
           <select #mySelect (change)="onChange(mySelect.value, blocage.id)">
             <option disabled selected>Non traité</option>
             <option value="SGE">SGE</option>
-            <option value="SGO">SGO</option>
+            <option value="COSY">COSY</option>
             <option value="GEC">GEC</option>
-            <option value="nonTraite">Ne pas traiter</option>
+            <option value="NONTRAITE">Ne pas traiter</option>
           </select>
         </label>
       </td>
+      <td class="table-light" *ngIf="blocage.userApp != null">{{blocage.userApp.username}}</td>
+      <td class="table-light" *ngIf="blocage.userApp == null">Personne</td>
     </tr>
     </tbody>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="5" [length]="totalElements"
+                 (page)="nextPage($event)">
+  </mat-paginator>
 </div>
+

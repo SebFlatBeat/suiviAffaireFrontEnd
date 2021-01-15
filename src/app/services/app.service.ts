@@ -2,16 +2,22 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppService {
+export class AppService implements CanActivate {
   private apiUrl = environment.apiUrl;
   authenticated = false;
   usernameSession = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+    boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    return this.authenticated;
   }
 
   authenticate(credentials: { username: any; password: any; } |
@@ -27,6 +33,7 @@ export class AppService {
       .subscribe(response => {
         this.authenticated = !!response;
         this.usernameSession = credentials?.username;
+        this.router.navigateByUrl('/analyse');
       });
   }
 }
