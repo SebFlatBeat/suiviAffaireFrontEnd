@@ -27,9 +27,9 @@ import {ToastrModule} from 'ngx-toastr';
 const appRoutes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/'},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'analyse', component: AnalyseComponent},
-  {path: 'synthese', component: SyntheseComponent}
+  {path: 'register', canActivate: [AppService], component: RegisterComponent},
+  {path: 'analyse', canActivate: [AppService], component: AnalyseComponent},
+  {path: 'synthese', canActivate: [AppService], component: SyntheseComponent}
 ];
 
 @NgModule({

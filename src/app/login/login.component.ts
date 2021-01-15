@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
       this.errorMessage = error.error.message;
       this.notification.showErrorConnexion('Une erreur a été saisie', 'Attention');
     }, () => {if (this.authenticated) {
-      this.router.navigateByUrl('/analyse');
       this.notification.showSuccessConnexion('Bienvenue ' + this.usernameSession, 'Connexion');
     }}
     );
