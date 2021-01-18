@@ -55,6 +55,31 @@ export class AnalyseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.createForm();
+    this.search();
+  }
+
+  public getData(): void {
+    this.analyseService.getAnalyse()
+      .subscribe(data => {
+        let tab: Blocage [] = [];
+        tab = tab.concat(data.content.filter(x => x.blocageSource === 'NONTRAITE'));
+        tab = tab.concat(data.content.filter(x => x.blocageSource !== 'NONTRAITE'));
+        data.content = tab;
+        this.analysesBlocage = data;
+      });
+  }
+
+  onChange(value: any, id: number): void {
+    this.analyseService.putBlocage(id, value, this.login.usernameSession).subscribe();
+    if (value !== 'NONTRAITE') {
+      this.notification.showSuccessPut('Vous avez choisi(e) ' + value, 'Choix du blocage');
+    } else {
+      this.notification.showWarnPut('Vous avez choisi(e) ne pas traiter', 'Choix du blocage');
+    }
+  }
+
+  createForm(): any {
     this.filteredOptionsBlocage = this.myBlocageControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filterBlocage(value))
@@ -82,27 +107,6 @@ export class AnalyseComponent implements OnInit {
         etatBlocage: [null]
       }
     );
-    this.search();
-  }
-
-  public getData(): void {
-    this.analyseService.getAnalyse()
-      .subscribe(data => {
-        let tab: Blocage [] = [];
-        tab = tab.concat(data.content.filter(x => x.blocageSource === 'NONTRAITE'));
-        tab = tab.concat(data.content.filter(x => x.blocageSource !== 'NONTRAITE'));
-        data.content = tab;
-        this.analysesBlocage = data;
-      });
-  }
-
-  onChange(value: any, id: number): void {
-    this.analyseService.putBlocage(id, value, this.login.usernameSession).subscribe();
-    if (value !== 'NONTRAITE') {
-      this.notification.showSuccessPut('Vous avez choisi(e) ' + value, 'Choix du blocage');
-    } else {
-      this.notification.showWarnPut('Vous avez choisi(e) ne pas traiter', 'Choix du blocage');
-    }
   }
 
   private _filterBlocage(value: string): string[] {
@@ -164,9 +168,7 @@ export class AnalyseComponent implements OnInit {
     this.search();
   }
 
-  reInit(): void{
-    this.getData();
-    this.searchOff();
+  reInit(): void {
     this.notification.showWarnSearch('Remise à zéro', 'Recherche');
   }
 }

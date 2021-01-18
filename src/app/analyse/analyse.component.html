@@ -86,8 +86,6 @@
         <button mat-raised-button color="primary" type="submit" class="btn-block">Chercher</button>
       </form>
     </mat-card>
-    <button type="submit" class="btn btn-outline-warning btn-sm float-sm-right" (click)="reInit()">Réinitialiser
-    </button>
     <button type="submit" class="btn btn-outline-danger btn-sm float-sm-right" (click)="searchOff()">Masquer</button>
   </section>
   <button [hidden]="onOff" type="submit" class="btn btn-outline-success btn-sm btn-block" (click)="searchOn()">
@@ -153,7 +151,7 @@
         </label>
       </td>
       <td class="table-light" *ngIf="blocage.userApp != null">{{blocage.userApp.username}}</td>
-      <td class="table-light" *ngIf="blocage.userApp == null">Personne</td>
+      <td class="table-light" *ngIf="blocage.userApp == null">----</td>
     </tr>
     </tbody>
   </table>
