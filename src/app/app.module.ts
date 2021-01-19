@@ -22,14 +22,16 @@ import {RegisterComponent} from './register/register.component';
 import {RegisterService} from './services/register.service';
 import {AppService} from './services/app.service';
 import {ToastrModule} from 'ngx-toastr';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const appRoutes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/'},
   {path: 'login', component: LoginComponent},
-  {path: 'register', canActivate: [AppService], component: RegisterComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'analyse', canActivate: [AppService], component: AnalyseComponent},
-  {path: 'synthese', canActivate: [AppService], component: SyntheseComponent}
+  {path: 'synthese', canActivate: [AppService], component: SyntheseComponent},
+  {path: 'profile', canActivate: [AppService], component: ProfileComponent}
 ];
 
 @NgModule({
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     SyntheseComponent,
     LoginComponent,
     RegisterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
